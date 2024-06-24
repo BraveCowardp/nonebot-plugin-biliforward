@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "nonebot-plugin-biliforward"
+version = "0.1.0"
+description = ""
+authors = ["Irelia <1074822720@qq.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+nonebot2 = "^2.3.1"
+nonebot-adapter-onebot = "^2.4.3"
+httpx = "^0.27.0"
+qrcode = "^7.4.2"
+nonebot-plugin-send-anything-anywhere = "^0.6.1"
+nonebot-plugin-localstore = "^0.6.0"
+aiofiles = "^23.2.1"
+sqlalchemy = "^2.0.31"
+nonebot-plugin-orm = {extras = ["aiosqlie"], version = "^0.7.3"}
+nonebot-plugin-apscheduler = "^0.4.0"
+
+[[tool.poetry.source]]
+name = "mirrors"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
