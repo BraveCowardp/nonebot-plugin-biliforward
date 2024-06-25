@@ -38,6 +38,11 @@ class WhiteListDatabase:
         cursor = await self.session.execute(statement=stmt)
         return [_.bili_user_id for _ in cursor.fetchall()]
     
+    async def get_user_list_by_group_id(self, group_id: int) -> list[int]:
+        stmt = select(WhiteList.user_id).where(WhiteList.group_id == group_id)
+        cursor = await self.session.execute(statement=stmt)
+        return [_.user_id for _ in cursor.fetchall()]
+    
     async def get_group_id_by_user_id(self, bili_user_id: int) -> list[int]:
         stmt = select(WhiteList.group_id).where(WhiteList.bili_user_id == bili_user_id)
         cursor = await self.session.execute(statement=stmt)
