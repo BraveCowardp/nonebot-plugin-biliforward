@@ -118,15 +118,19 @@ class BiliApi:
         async with httpx.AsyncClient() as client:
             cookie_file = store.get_data_file(PLUGIN_NAME, "cookie")
             await load_cookie(file=cookie_file, client=client)
-            respose = await client.get(url=FETCH_MSG, params=params, headers=headers, timeout=90)
             try:
-                msg_list = []
-                for message in respose.json()['data']['messages']:
-                    msg_list.append(RawMsg(message))
+                respose = await client.get(url=FETCH_MSG, params=params, headers=headers, timeout=600)
+                try:
+                    msg_list = []
+                    for message in respose.json()['data']['messages']:
+                        msg_list.append(RawMsg(message))
+                except:
+                    logger.debug(traceback.format_exc())
+                    logger.debug(f"status code:{respose.status_code}")
+                    logger.debug(f"response:{respose.json()}")
             except:
                 logger.debug(traceback.format_exc())
-                logger.debug(f"status code:{respose.status_code}")
-                logger.debug(f"response:{respose.json()}")
+                logger.debug(f"talker_id:{talker_id}")
 
         return msg_list
     
