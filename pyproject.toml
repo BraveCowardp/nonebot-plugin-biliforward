@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-biliforward"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["Irelia <1074822720@qq.com>"]
 license = "MIT"
@@ -16,8 +16,8 @@ nonebot-plugin-send-anything-anywhere = "^0.6.1"
 nonebot-plugin-localstore = "^0.6.0"
 aiofiles = "^23.2.1"
 sqlalchemy = "^2.0.31"
-nonebot-plugin-orm = {extras = ["aiosqlie"], version = "^0.7.3"}
 nonebot-plugin-apscheduler = "^0.4.0"
+nonebot-plugin-orm = "^0.7.3"
 
 [[tool.poetry.source]]
 name = "mirrors"
