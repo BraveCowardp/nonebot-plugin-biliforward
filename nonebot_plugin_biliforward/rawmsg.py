@@ -17,7 +17,7 @@ class RawMsg:
     async def if_new(self, msg_db: MsgInfoDatabase) -> bool:
         now_time = time.time()
 
-        if now_time - self.timestamp > 12:
+        if now_time - self.timestamp > 3600:
             return False
         
         msg = await msg_db.get_msg_info(msg_key=self.msg_key)

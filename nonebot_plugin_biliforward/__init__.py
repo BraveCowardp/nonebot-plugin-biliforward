@@ -7,6 +7,7 @@ from nonebot.params import CommandArg
 from nonebot.log import logger
 import asyncio
 import time
+import datetime
 
 require("nonebot_plugin_saa")
 require("nonebot_plugin_localstore")
@@ -46,6 +47,7 @@ bili_user_info = on_command('b站登录用户信息')
 add_whitelist = on_command('添加b站转发白名单')
 
 enable_auto_select_bot()
+interval = 1000
 
 @bili_login.handle()
 async def handle_bili_login():
@@ -106,7 +108,7 @@ async def handle_add_whitelist(event: GroupMessageEvent, session: async_scoped_s
         await whitelistdatabase.commit()
         await Text(f"用户{user_info.uname}(uid:{user_info.mid})已关注并添加到本群转发白名单").finish()
 
-@scheduler.scheduled_job('cron', second='*/10')
+@scheduler.scheduled_job('interval', seconds=interval, id='bili_fetch_msg', next_run_time=datetime.datetime.now())
 async def bili_fetch_msg():
     session = get_session()
     whitelistdatabase = WhiteListDatabase(session=session)
@@ -134,3 +136,5 @@ async def bili_fetch_msg():
                     await msginfodatabase.insert_msg_info(external_msg=raw_msg.get_new_msginfo())
                     await msginfodatabase.commit()
     await session.close()
+    await asyncio.sleep(5)
+    scheduler.add_job(bili_fetch_msg, 'interval', seconds=interval, id='bili_fetch_msg', next_run_time=datetime.datetime.now() + datetime.timedelta(seconds=1), replace_existing=True)

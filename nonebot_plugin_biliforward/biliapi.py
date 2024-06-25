@@ -112,7 +112,8 @@ class BiliApi:
         msg_list: None|list[RawMsg] = None
         params = {
             'talker_id': talker_id,
-            'session_type': 1
+            'session_type': 1,
+            'size':10
             }
         async with httpx.AsyncClient() as client:
             cookie_file = store.get_data_file(PLUGIN_NAME, "cookie")

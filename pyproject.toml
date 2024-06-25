@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-biliforward"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Irelia <1074822720@qq.com>"]
 license = "MIT"
